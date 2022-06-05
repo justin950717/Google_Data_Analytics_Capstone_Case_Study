@@ -1,0 +1,252 @@
+---
+title: "Case Study 1 Analysis"
+author: "Justin Ng"
+date: "11/24/2021"
+---
+
+#Capstone Project - Case Study 1 Analysis
+##To understand how casual riders and annual members use Cyclistic bikes differently. 
+
+#STEP 1: PACKAGES - Installation & loading of necessary packges
+- tidyverse
+- lubridate
+- ggplot2
+```{r}
+install.packages("tidyverse")
+install.packages("lubridate")
+library(tidyverse)
+library(lubridate)
+library(ggplot2)
+```
+
+# STEP 2: PREPARE DATA - Data collection & storing of information
+## Upload Divvy datasets (csv files) and assign variable name
+```{r}
+q2_2019 <- read_csv("Divvy_Trips_2019_Q2.csv")
+q3_2019 <- read_csv("Divvy_Trips_2019_Q3.csv")
+q4_2019 <- read_csv("Divvy_Trips_2019_Q4.csv")
+q1_2020 <- read_csv("Divvy_Trips_2020_Q1.csv")
+```
+
+## Compare column names each of the files
+```{r}
+colnames(q2_2019)
+colnames(q3_2019)
+colnames(q4_2019)
+colnames(q1_2020)
+```
+
+## Rename columns  to make them consisent with q1_2020 
+```{r}
+q2_2019 <- rename(q2_2019
+                  ,ride_id = "01 - Rental Details Rental ID"
+                  ,rideable_type = "01 - Rental Details Bike ID" 
+                  ,started_at = "01 - Rental Details Local Start Time"  
+                  ,ended_at = "01 - Rental Details Local End Time"  
+                  ,start_station_name = "03 - Rental Start Station Name" 
+                  ,start_station_id = "03 - Rental Start Station ID"
+                  ,end_station_name = "02 - Rental End Station Name" 
+                  ,end_station_id = "02 - Rental End Station ID"
+                  ,member_casual = "User Type")
+
+q3_2019 <- rename(q3_2019
+                  ,ride_id = trip_id
+                  ,rideable_type = bikeid 
+                  ,started_at = start_time  
+                  ,ended_at = end_time  
+                  ,start_station_name = from_station_name 
+                  ,start_station_id = from_station_id 
+                  ,end_station_name = to_station_name 
+                  ,end_station_id = to_station_id 
+                  ,member_casual = usertype)
+
+q4_2019 <- rename(q4_2019
+                  ,ride_id = trip_id
+                  ,rideable_type = bikeid 
+                  ,started_at = start_time  
+                  ,ended_at = end_time  
+                  ,start_station_name = from_station_name 
+                  ,start_station_id = from_station_id 
+                  ,end_station_name = to_station_name 
+                  ,end_station_id = to_station_id 
+                  ,member_casual = usertype)
+
+```
+
+## Inspect dataframes
+```{r}
+str(q1_2020)
+str(q4_2019)
+str(q3_2019)
+str(q2_2019)
+```
+
+## Convert ride_id and rideable_type to character so that they can stack correctly
+```{r}
+q4_2019 <-  mutate(q4_2019, ride_id = as.character(ride_id)
+                   ,rideable_type = as.character(rideable_type)) 
+q3_2019 <-  mutate(q3_2019, ride_id = as.character(ride_id)
+                   ,rideable_type = as.character(rideable_type)) 
+q2_2019 <-  mutate(q2_2019, ride_id = as.character(ride_id)
+                   ,rideable_type = as.character(rideable_type)) 
+```
+
+## Stack individual quarter's data frames into one big data frame
+```{r}
+all_trips <- bind_rows(q2_2019, q3_2019, q4_2019, q1_2020)
+```
+
+## Remove lat, long, birthyear, and gender fields
+"tripduration" removed here as q1_2020 does not have "tripduration" column. Will be added later on in duration aggregation of data
+```{r}
+all_trips <- all_trips %>%  
+  select(-c(start_lat, start_lng, end_lat, end_lng, birthyear, gender,
+            "01 - Rental Details Duration In Seconds Uncapped", 
+            "05 - Member Details Member Birthday Year", "Member Gender",
+            "tripduration"))
+```
+
+## Further inspection of the new table that has been created
+```{r}
+colnames(all_trips)  #List of column names
+nrow(all_trips)      #How many rows are in data frame
+dim(all_trips)       #Dimensions of the data frame
+head(all_trips)      #See the first 6 rows of data frame.
+str(all_trips)       #See list of columns and data types (numeric, character, etc)
+summary(all_trips)   #Statistical summary of data. Mainly for numerics
+
+```
+
+# STEP 3: PROCESS DATA - Cleaning of data
+There were 4 issues found:
+1) In "member_casual" column, there are two names for members ("member" and "Subscriber") and two names for casual riders ("Customer" and "casual"). Need to consolidate that from four to two labels & standardize it.
+2) Data can only be aggregated at the ride-level, which is too granular. We will want to add some additional columns of data;such as day, month, year - that provide additional opportunities to aggregate the data.
+3) 2020Q1 data did not have the "tripduration" column. Need calculated field for ride_length to the entire dataframe for consistency.
+4) There are some rides where "tripduration" shows up as negative. Need to delete this rows as they don't make sense.
+
+## 1.0 View "member_casual" column
+```{r}
+table(all_trips$member_casual)
+```
+
+## 1.1 Reassign proper pronouns for data in "member_casual" column
+Only use "member" for members and "casual" for casual riders throughout dataframe, to make it consistent.
+```{r}
+all_trips <- all_trips %>%  
+  mutate(member_casual = recode(member_casual
+                           ,"Subscriber" = "member"
+                           ,"Customer" = "casual"))
+
+```
+
+## 2.0 Add columns that list the date, month, day, and year of each ride
+```{r}
+all_trips$date <- as.Date(all_trips$started_at) #The default format yyyy-mm-dd
+
+all_trips$month <- format(as.Date(all_trips$date), "%m")
+all_trips$day <- format(as.Date(all_trips$date), "%d")
+all_trips$year <- format(as.Date(all_trips$date), "%Y")
+all_trips$day_of_week <- format(as.Date(all_trips$date), "%A")
+```
+
+## 3.0 Add a "ride_length" calculation to all_trips (in seconds)
+```{r}
+all_trips$ride_length <- difftime(all_trips$ended_at,all_trips$started_at,units = "secs")
+```
+
+## 3.1 Convert "ride_length" to numeric in order to run calculations on the data
+```{r}
+all_trips$ride_length <- as.numeric(as.character(all_trips$ride_length))
+
+is.numeric(all_trips$ride_length) #To double confirm if ride_length is a numeric type
+```
+
+## 4.0 Remove bad data
+Create a new version of the dataframe (v2), since data is being removed
+```{r}
+all_trips_v2 <- all_trips[!(all_trips$start_station_name == "HQ QR" | all_trips$ride_length<0),]
+#Starting station at HQ HR and ride length that has a negative value will be excluded in the analysis as bikes were taken out of docks at HQ HR for quality check and doesn't make sense to have rides less than 0 secs
+#Offsetting all start_station_name = "HQ QR" OR ride_length < 0;by using NOT! logical operator. Everything that meets this condition will not be included.
+#Comma at the end of argument means rows that meet the NOT logic condition will be offset.
+```
+
+# STEP 4: ANALYSIS - Calculations and Trends
+## General mean, max, min ride_length
+```{r}
+mean(all_trips_v2$ride_length) #average ride_length
+median(all_trips_v2$ride_length) 
+max(all_trips_v2$ride_length) #longest ride_length
+min(all_trips_v2$ride_length) #shortest ride_length
+```
+OR
+```{r}
+summary(all_trips_v2$ride_length)
+```
+
+## Comparison of members vs casual users ride_length
+```{r}
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual, FUN = mean)
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual, FUN = median)
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual, FUN = max)
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual, FUN = min)
+```
+
+## Average ride_length by members & casual users - for each day of the week
+```{r}
+all_trips_v2$day_of_week <- ordered(all_trips_v2$day_of_week, levels=c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"))
+#To arrange the days in order - starting with Sunday til Saturday
+
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual + all_trips_v2$day_of_week, FUN = mean)
+```
+
+## Summary of total number of rides & average ride duration (length) by members & casual users - for each day of the week
+```{r}
+all_trips_v2 %>% 
+  mutate(weekday = wday(started_at, label = TRUE)) %>%   #Creates day of week field using wday()
+  group_by(member_casual, weekday) %>%                   #Groups by usertype and weekday
+  summarise(number_of_rides = n()							           #Calculates the number of rides and average ride_length 
+  ,average_duration = mean(ride_length)) %>% 		         
+  arrange(member_casual, weekday)								         #Sorts
+```
+
+# STEP 5: SHARE - Visualization
+## Visualization of total number of rides by rider type - for each day of the week
+```{r}
+all_trips_v2 %>% 
+  mutate(weekday = wday(started_at, label = TRUE)) %>% 
+  group_by(member_casual, weekday) %>% 
+  summarise(number_of_rides = n()
+            ,average_duration = mean(ride_length)) %>% 
+  arrange(member_casual, weekday)  %>% 
+  ggplot(mapping=aes(x = weekday, y = number_of_rides, fill = member_casual)) +
+  geom_col(position = "dodge") +
+  labs(title = "Total Number of Rides by Members & Casual Users", x = "Day of the Week"
+       ,y = "Number of Rides")
+```
+
+## Visualization of average ride duaration by rider type - for each day of the week
+```{r}
+all_trips_v2 %>% 
+  mutate(weekday = wday(started_at, label = TRUE)) %>% 
+  group_by(member_casual, weekday) %>% 
+  summarise(number_of_rides = n()
+            ,average_duration = mean(ride_length)) %>% 
+  arrange(member_casual, weekday)  %>% 
+  ggplot(aes(x = weekday, y = average_duration, fill = member_casual)) +
+  geom_col(position = "dodge") +
+  labs(title = "Average Ride Duration by Members & Casual Users", x = "Day of the Week"
+       ,y = "Average Ride Duration")
+```
+
+## Export results as a .csv file
+```{r}
+analysis <- all_trips_v2 %>% 
+  mutate(weekday = wday(started_at, label = TRUE)) %>%   
+  group_by(member_casual, weekday) %>%                   
+  summarise(number_of_rides = n()							           
+  ,average_duration = mean(ride_length)) %>% 		         
+  arrange(member_casual, weekday)
+
+write.csv(analysis, file = "~/Google Data Analytics/Capstone/R Analysis/Case_Study_1_Analysis.csv")
+```
+
