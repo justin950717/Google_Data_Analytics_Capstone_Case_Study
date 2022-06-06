@@ -38,6 +38,16 @@ The result of the analysis between casual users and annual members were cleaned 
 
 
 ### Visualizations
-![Summary Image](https://github.com/justin950717/Capstone-Project-1/blob/master/Visualizations/Summary%20Results.png)
+Total Number of Rides of Casual vs Members
+![Total no. of rides](https://github.com/justin950717/Capstone-Project-1/blob/master/Visualizations/total_no_of_rides.png)
+
+
+Average Ride Duration of Casual vs Members
+![Average Ride Duration](https://github.com/justin950717/Capstone-Project-1/blob/master/Visualizations/average_ride_duration.png)
+
+Summary Visualization
+![Summary Visualization](https://github.com/justin950717/Capstone-Project-1/blob/master/Visualizations/Summary%20Results.png)
+
+
 
 
