@@ -21,6 +21,12 @@ The assumptions made was any ride_length of less than 1minute were recorded wron
 ### Analysis
 The result of the analysis between casual users and annual members were cleaned and tabulated as below. The main 2 parameters to study their patterns are the number_of_rides and average_ride_duration between both types of users; for each day of the week throughout 1 year.
 
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
 	| member_casual |	weekday |	number_of_rides	| average_duration |
   |:-------------:|:-------:|:---------------:|:----------------:|
   |   casual		  |   Sun		|181293		      |  3581.405388     |
@@ -40,7 +46,7 @@ The result of the analysis between casual users and annual members were cleaned 
 14	member		Sat		287958		968.933723
 
 
-### Visualizations
+### Visualizations & Dashboard
 Total Number of Rides of Members & casual Users
 ![Total no. of rides](https://github.com/justin950717/Capstone-Project-1/blob/master/Visualizations/total_no_of_rides.png)
 
