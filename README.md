@@ -26,23 +26,18 @@ The result of the analysis between casual users and annual members were cleaned 
 | casual        | Sun     | 181293          | 3581.405388      |
 | casual        | Mon     | 103296          | 3372.286923      |
 | casual        | Tue     | 90510	          | 3596.359949      |
-
-	
-  
-2							
-3					      	
-4	casual		Wed		92457	      	3718.661897
-5	casual		Thu		102679		3682.984671
-6	casual		Fri		122404		3773.835112
-7	casual		Sat		209543		3331.913841
-8	member		Sun		267965		919.9746161
-9	member		Mon		472196		842.5725694
-10	member		Tue		508445		826.142747
-11	member		Wed		500329		823.9996442
-12	member		Thu		484177		823.9278033
-13	member		Fri		452790		824.5305064
-14	member		Sat		287958		968.933723
-
+| casual        | Wed     | 92457	          | 3718.661897      |
+| casual        | Thu     | 102679	        | 3682.984671      |	
+| casual        | Fri     | 122404	        | 3773.835112      |  
+| casual        | Sat     | 209543	        | 3331.913841      |
+| member        | Sun     | 267965	        | 919.9746161      |				      	
+| member        | Mon     | 472196	        | 842.5725694      |
+| member        | Tue     | 508445	        | 826.142747       |	
+| member        | Wed     | 500329	        | 823.9996442      |
+| member        | Thu     | 484177	        | 823.9278033      |
+| member        | Fri	    | 452790	        | 824.5305064      |
+| member        | Sat     | 287958	        | 968.933723       |
+						
 
 ### Visualizations & Dashboard
 Total Number of Rides of Members & casual Users
