@@ -36,7 +36,6 @@ The result of the analysis between casual users and annual members were cleaned 
 
 
 ### Visualizations
-![](C:\Users\USER\Documents\Google Data Analytics\Capstone\GitHub Capstone Case Study 1\Capstone---Case-Study-1\Visualizations/Summary%20Results.png)
-
+![Summary Image](C:\Users\USER\Documents\Google Data Analytics\Capstone\GitHub Capstone Case Study 1\Capstone---Case-Study-1\Visualizations/Summary%20Results.png)
 
 
