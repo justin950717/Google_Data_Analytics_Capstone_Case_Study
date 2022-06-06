@@ -8,6 +8,7 @@ This data source is from Cyclistic’s historical trip data: Index of bucket "di
 
 *Note: Cyclistic is a fictional company for the purpose of this case study. The above-mentioned dataset is made available by Motivate International Inc, under this licence (https://www.divvybikes.com/data-license-agreement)
 
+blah blah
 
 
 
