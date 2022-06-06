@@ -10,6 +10,9 @@ This data source is from Cyclistic’s historical trip data: Index of bucket "di
 *Note: Cyclistic is a fictional company for the purpose of this case study. The above-mentioned dataset is made available by Motivate International Inc, under this licence (https://www.divvybikes.com/data-license-agreement)
 
 
+### Goals
+- To justify that maximizing the number of annual members will be key to future growth, by converting casual riders    into members.
+
 
 ### Assumptions 
 The assumptions made was any ride_length of less than 1minute were recorded wrongly, as it does not make sense to ride for less than a minute from one destination to another. No (or small insignificant amount) of longitudinal and lateral coordinates were displaced for ride_length of less than 1minute. Hence, any ride_length less than 1minute were considered invalid data and was deleted
@@ -38,15 +41,26 @@ The result of the analysis between casual users and annual members were cleaned 
 
 
 ### Visualizations
-Total Number of Rides of Casual vs Members
+Total Number of Rides of Members & casual Users
 ![Total no. of rides](https://github.com/justin950717/Capstone-Project-1/blob/master/Visualizations/total_no_of_rides.png)
 
 
-Average Ride Duration of Casual vs Members
+Average Ride Duration of Members & casual Users
 ![Average Ride Duration](https://github.com/justin950717/Capstone-Project-1/blob/master/Visualizations/average_ride_duration.png)
 
 Summary Visualization
 ![Summary Visualization](https://github.com/justin950717/Capstone-Project-1/blob/master/Visualizations/Summary%20Results.png)
+
+
+### Key Findings
+- Annual members more prevalent during weekdays.
+- Casual Riders rides longer on average.
+
+### Conclusion & Recommendations
+There are more annual members than casual riders utilizing Cyclist Bike-Share. Hence, more potential growth among annual members. Strongly encourage to market to casual riders by converting them into members. Since annual members are larger and more profitable than casual riders.
+
+
+
 
 
 
