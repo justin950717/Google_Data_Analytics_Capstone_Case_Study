@@ -18,8 +18,8 @@ The assumptions made was any ride_length of less than 1minute were recorded wron
 ### Analysis
 The result of the analysis between casual users and annual members were cleaned and tabulated as below. The main 2 parameters to study their patterns are the number_of_rides and average_ride_duration between both types of users; for each day of the week throughout 1 year.
 
-	member_casual	weekday	number_of_rides	average_duration
-1	casual		Sun		181293		3581.405388
+	| member_casual |	weekday |	number_of_rides	| average_duration |
+  |    casual		  |   Sun		|  181293		      |  3581.405388     |
 2	casual		Mon		103296		3372.286923
 3	casual		Tue		90510	      	3596.359949
 4	casual		Wed		92457	      	3718.661897
@@ -36,6 +36,6 @@ The result of the analysis between casual users and annual members were cleaned 
 
 
 ### Visualizations
-![Summary Image](C:\Users\USER\Documents\Google Data Analytics\Capstone\GitHub Capstone Case Study 1\Capstone---Case-Study-1\Visualizations/Summary%20Results.png)
+![Summary Image](https://github.com/justin950717/Capstone-Project-1/blob/master/Visualizations/Summary%20Results.png)
 
 
