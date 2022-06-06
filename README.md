@@ -19,7 +19,9 @@ The assumptions made was any ride_length of less than 1minute were recorded wron
 The result of the analysis between casual users and annual members were cleaned and tabulated as below. The main 2 parameters to study their patterns are the number_of_rides and average_ride_duration between both types of users; for each day of the week throughout 1 year.
 
 	| member_casual |	weekday |	number_of_rides	| average_duration |
-  |    casual		  |   Sun		|  181293		      |  3581.405388     |
+  | ------------- | ------- | --------------- | ---------------- |
+  |   casual		  |   Sun		|  181293		      |  3581.405388     |
+  
 2	casual		Mon		103296		3372.286923
 3	casual		Tue		90510	      	3596.359949
 4	casual		Wed		92457	      	3718.661897
