@@ -1,4 +1,4 @@
-# ---Case Study 1---
+# Capstone - Case Study 1
 ## Google Data Analytics Certificate Course
 
 
