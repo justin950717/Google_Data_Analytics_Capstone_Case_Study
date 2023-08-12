@@ -15,7 +15,7 @@ This data source is from Cyclistic’s historical trip data: Index of bucket "di
 
 
 ### Assumptions 
-The assumptions made was any ride_length of less than 1minute were recorded wrongly, as it does not make sense to ride for less than a minute from one destination to another. No (or small insignificant amount) of longitudinal and lateral coordinates were displaced for ride_length of less than 1minute. Hence, any ride_length less than 1minute were considered invalid data and was deleted
+The assumptions made was any ride_length of less than 1minute were recorded wrongly, as it does not make sense to ride for less than a minute from one destination to another. Hence, any ride_length less than 1minute were considered invalid data and was deleted
 
 
 ### Analysis
