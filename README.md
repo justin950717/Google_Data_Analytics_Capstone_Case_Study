@@ -11,7 +11,7 @@ This data source is from Cyclistic’s historical trip data: Index of bucket "di
 
 
 ### Goals
-- To justify that maximizing the number of annual members will be key to future growth, by converting casual riders    into members.
+- To justify that maximizing the number of annual members will be key to future growth, by converting casual riders into members.
 
 
 ### Assumptions 
@@ -43,7 +43,6 @@ The result of the analysis between casual users and annual members were cleaned 
 Total Number of Rides of Members & Casual Users
 ![Total no. of rides](https://github.com/justin950717/Capstone-Project-1/blob/master/Visualizations/total_no_of_rides.png)
 
-
 Average Ride Duration of Members & Casual Users
 ![Average Ride Duration](https://github.com/justin950717/Capstone-Project-1/blob/master/Visualizations/average_ride_duration.png)
 
@@ -53,10 +52,11 @@ Summary Visualization
 
 ### Key Findings
 - Annual Members more prevalent during weekdays.
+- Annual members utilize the Cyclist Bike-Share more as they ride more frequently.
 - Casual Riders rides longer on average.
 
 ### Conclusion & Recommendations
-There are more annual members than casual riders utilizing Cyclist Bike-Share. Hence, more potential growth among annual members. it is strongly encourage to market to casual riders by converting them into members. Since annual members are larger and more profitable than casual riders.
+There are more annual members than casual riders utilizing Cyclist Bike-Share, which is an indication of the potential growth among annual members. Hence, it is strongly encourage to market to casual riders by converting them into members, since annual members are larger and more profitable than casual riders.
 
 
 
